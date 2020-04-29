@@ -1,0 +1,71 @@
+---
+title: "Pokemons"
+author: "Maskim Dzerkach"
+date: "4/29/2020"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+#install.packages('devtools')
+#devtools::install_github('Kitware/candela', subdir='R/candela')
+library(candela)
+```
+
+## Upload Pokemons
+
+```{r cars}
+pokemons <- read.csv("/home/kusok/Downloads/Pokemon.csv")
+colnames(pokemons)[3] <- "Type1"
+colnames(pokemons)[4] <- "Type2"
+str(pokemons)
+```
+
+## Pokemons with the largest attack
+
+```{r g1, echo=FALSE}
+candela('BarChart', data=pokemons, x='Type1', y='Attack', color="Generation", aggregate="average")
+candela('BarChart', data=pokemons, x='Type1', y='Attack', color="Generation", aggregate="max")
+candela('BarChart', data=pokemons, x='Type1', y='Attack', color="Type2", aggregate="average")
+```
+
+## Pokemons with the largest defense
+
+```{r g2, echo=FALSE}
+candela('BarChart', data=pokemons, x='Type1', y='Defense', color="Generation", aggregate="average")
+candela('BarChart', data=pokemons, x='Type1', y='Defense', color="Generation", aggregate="max")
+candela('BarChart', data=pokemons, x='Type1', y='Defense', color="Type2", aggregate="average")
+```
+
+## Pokemons with the largest speed
+
+```{r g3, echo=FALSE}
+candela('BarChart', data=pokemons, x='Type1', y='Speed', color="Generation", aggregate="average")
+candela('BarChart', data=pokemons, x='Type1', y='Speed', color="Generation", aggregate="max")
+candela('BarChart', data=pokemons, x='Type1', y='Speed', color="Type2", aggregate="average")
+```
+
+## Best Generation
+```{r g4, echo=FALSE}
+candela('BarChart', data=pokemons, x='Generation', y='Attack', color="Type1", aggregate="average")
+candela('BarChart', data=pokemons, x='Generation', y='Attack', color="Type1", aggregate="max")
+
+
+candela('BarChart', data=pokemons, x='Generation', y='Defense', color="Type1", aggregate="average")
+candela('BarChart', data=pokemons, x='Generation', y='Defense', color="Type1", aggregate="max")
+
+candela('BarChart', data=pokemons, x='Generation', y='Speed', color="Type1", aggregate="average")
+
+candela('BarChart', data=pokemons, x='Generation', y='Speed', color="Type1", aggregate="max")
+
+
+candela('BarChart', data=pokemons, x='Generation', y='HP', color="Type1", aggregate="average")
+candela('BarChart', data=pokemons, x='Generation', y='HP', color="Type1", aggregate="max")
+```
+
+## Compare of main attributes
+```{r g5, echo=FALSE}
+candela('ScatterPlotMatrix', data=pokemons, fields=c('Defense', 'Attack', 'Speed'))
+
+```
